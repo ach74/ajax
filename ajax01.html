@@ -18,7 +18,7 @@
 			document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
 		}
 	}
-	xmlhttp.open("GET","http://127.0.0.1/ajax01/ajax01.php?par=0",true);
+	xmlhttp.open("GET","http://127.0.0.1/ajax/ajax01.php?par=0",true);
 	xmlhttp.send();
 }
 function loadXMLDoc_ver() {
@@ -36,7 +36,7 @@ function loadXMLDoc_ver() {
 			document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
 		}
 	}
-	xmlhttp.open("GET","http://127.0.0.1/ajax01/ajax01.php?par=1",true);
+	xmlhttp.open("GET","http://127.0.0.1/ajax/ajax01.php?par=1",true);
 	xmlhttp.send();
 }
 var campoImput = document.getElementsByTagName("input");
@@ -62,34 +62,39 @@ function validarFormulario(){
 
 
 function loadXMLDocCrearUsuario(){
-
-	if (validarFormulario()==true) {
+	
+	//if (validarFormulario()==true) {
 
 		var xmlhttp;
-		if (window.XMLHttpRequest) {
-		// code for IE7+, Firefox, Chrome, Opera, Safari
-		xmlhttp=new XMLHttpRequest();
-	}else{
-		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-	}
 
-	xmlhttp.onreadystatechange = function() {
-		if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-			document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+		if (window.XMLHttpRequest) {
+			xmlhttp=new XMLHttpRequest();
+		}else{
+			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 		}
+
+		xmlhttp.onreadystatechange = function() {
+			if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+				document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+			}
+		}
+
+		param = "nombre="+campoImput[0].value+"&email="+campoImput[1].value+"&telefono="+campoImput[2].value;
+		xmlhttp.open("POST","http://127.0.0.1/ajax/ajax01.php",true);
+		xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		xmlhttp.send(param);
+		alert(param);
 	}
-	xmlhttp.open("POST","http://127.0.0.1/ajax01/ajax01.php",true);
-	xmlhttp.send("nombre="+campoImput[0].value+"&email="+campoImput[1].value+"&telefono="+campoImput[0].value);
-}else{
-	alert(msg);
-}
-}
+//else{
+//	alert(msg);
+//}
+//}
 </script>
 </head>
 <body>
 	<h2>AJAX</h2>
 	<button type="button" onclick="loadXMLDoc()">Crear nuevo</button>
 	<button type="button" onclick="loadXMLDoc_ver()">Ver Usuarios</button>
-	<form id="myDiv" method="POST"></form>
+	<form id="myDiv"></form>
 </body>
 </html>

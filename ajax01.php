@@ -1,5 +1,18 @@
 <?php 
 header("access-control-allow-origin: *");
+
+if (isset($_POST["nombre"])&&isset($_POST["email"])&&isset($_POST["telefono"])) {
+	$name = $_POST["nombre"];
+	$email = $_POST["email"];
+	$tlf = $_POST["telefono"];
+	InsertarDatos();
+}
+
+
+function InsertarDatos(){
+	echo "string";
+}
+
 if (isset($_GET["par"])) {
 	$par = $_GET["par"];
 	switch ($par) {
