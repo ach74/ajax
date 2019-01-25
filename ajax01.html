@@ -6,89 +6,101 @@
 		function loadXMLDoc() {
 			var xmlhttp;
 			if (window.XMLHttpRequest) {
-		// code for IE7+, Firefox, Chrome, Opera, Safari
-		xmlhttp=new XMLHttpRequest();
-	}
-	else  {
-		// code for IE6, IE5
-		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-	}
-	xmlhttp.onreadystatechange = function() {
-		if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-			document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
-		}
-	}
-	xmlhttp.open("GET","http://127.0.0.1/ajax/ajax01.php?par=0",true);
-	xmlhttp.send();
-}
-function loadXMLDoc_ver() {
-	var xmlhttp;
-	if (window.XMLHttpRequest) {
-		// code for IE7+, Firefox, Chrome, Opera, Safari
-		xmlhttp=new XMLHttpRequest();
-	}
-	else  {
-		// code for IE6, IE5
-		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-	}
-	xmlhttp.onreadystatechange = function() {
-		if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-			document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
-		}
-	}
-	xmlhttp.open("GET","http://127.0.0.1/ajax/ajax01.php?par=1",true);
-	xmlhttp.send();
-}
-var campoImput = document.getElementsByTagName("input");
-var msg = "Debes escribir algo en los campos:\n";
-
-function validarFormulario(){
-	validado=true;
-	if(campoImput[0].value == "" || campoImput[0].length == 0 || /^\s+$/.test(campoImput[0].value)){
-		msg +='ERROR: El campo nombre no debe ir vacío o lleno de solamente espacios en blanco\n';
-		validado=false;
-	}
-	if(!(/\S+@\S+\.\S+/.test(campoImput[1].value))){
-		msg +='ERROR: Debe escribir un correo válido\n';
-		validado=false;
-	}
-	if(campoImput[2].value == null || campoImput.length == 0 || isNaN(campoImput[2].value)){
-		msg +='ERROR: Debe ingresar un numero de telefono\n';
-		validado=false;
-	}
-	
-	return validado;
-}
-
-
-function loadXMLDocCrearUsuario(){
-	
-	//if (validarFormulario()==true) {
-
-		var xmlhttp;
-
-		if (window.XMLHttpRequest) {
-			xmlhttp=new XMLHttpRequest();
-		}else{
-			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-		}
-
-		xmlhttp.onreadystatechange = function() {
-			if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-				document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+				xmlhttp=new XMLHttpRequest();
+			}else  {
+				xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 			}
+			xmlhttp.onreadystatechange = function() {
+				if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+					document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+				}
+			}
+			xmlhttp.open("GET","http://127.0.0.1/ajax/ajax01.php?par=0",true);
+			xmlhttp.send();
 		}
 
-		param = "nombre="+campoImput[0].value+"&email="+campoImput[1].value+"&telefono="+campoImput[2].value;
-		xmlhttp.open("POST","http://127.0.0.1/ajax/ajax01.php",true);
-		xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-		xmlhttp.send(param);
-		alert(param);
-	}
+		function loadXMLDoc_ver() {
+			var xmlhttp;
+			if (window.XMLHttpRequest) {
+				xmlhttp=new XMLHttpRequest();
+			}else{
+				xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			xmlhttp.onreadystatechange = function() {
+				if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+					document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+				}
+			}
+			xmlhttp.open("GET","http://127.0.0.1/ajax/ajax01.php?par=1",true);
+			xmlhttp.send();
+		}
+
+		var campoImput = document.getElementsByTagName("input");
+		var msg = "Debes escribir algo en los campos:\n";
+
+		function validarFormulario(){
+			validado=true;
+			if(campoImput[0].value == "" || campoImput[0].length == 0 || /^\s+$/.test(campoImput[0].value)){
+				msg +='ERROR: El campo nombre no debe ir vacío o lleno de solamente espacios en blanco\n';
+				validado=false;
+			}
+			if(!(/\S+@\S+\.\S+/.test(campoImput[1].value))){
+				msg +='ERROR: Debe escribir un correo válido\n';
+				validado=false;
+			}
+			if(campoImput[2].value == null || campoImput.length == 0 || isNaN(campoImput[2].value)){
+				msg +='ERROR: Debe ingresar un numero de telefono\n';
+				validado=false;
+			}
+			return validado;
+		}
+
+
+		function loadXMLDocCrearUsuario(){
+			var sl = document.getElementById("selectPuesto").value;
+			//if (validarFormulario()==true) {
+
+				var xmlhttp;
+
+				if (window.XMLHttpRequest) {
+					xmlhttp=new XMLHttpRequest();
+				}else{
+					xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+				}
+
+				xmlhttp.onreadystatechange = function() {
+					if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+						document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+					}
+				}
+				param = "nombre="+campoImput[0].value+"&email="+campoImput[1].value+"&telefono="+campoImput[2].value+"&departameto="+sl;
+				xmlhttp.open("POST","http://127.0.0.1/ajax/ajax01.php",true);
+				xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				xmlhttp.send(param);
+				alert(param);
+
+//	}	
 //else{
 //	alert(msg);
 //}
-//}
+}
+
+function Selecionar_Dep(){
+	var sel_Dep = document.getElementById("sel_dep").value;
+	var xmlhttp;
+	if (window.XMLHttpRequest) {
+		xmlhttp=new XMLHttpRequest();
+	}else{
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.onreadystatechange = function() {
+		if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+			document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+		}
+	}
+	xmlhttp.open("GET","http://127.0.0.1/ajax/ajax01.php?par02="+sel_Dep,true);
+	xmlhttp.send();
+}
 </script>
 </head>
 <body>
