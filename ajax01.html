@@ -84,10 +84,11 @@
 //	alert(msg);
 //}
 }
-
+var json;
 function Selecionar_Dep(){
 	var sel_Dep = document.getElementById("sel_dep").value;
 	var xmlhttp;
+
 	if (window.XMLHttpRequest) {
 		xmlhttp=new XMLHttpRequest();
 	}else{
@@ -95,11 +96,16 @@ function Selecionar_Dep(){
 	}
 	xmlhttp.onreadystatechange = function() {
 		if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-			document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+			json = JSON.parse(xmlhttp.responseText);
+			//console.log(json[0].Email);
 		}
 	}
 	xmlhttp.open("GET","http://127.0.0.1/ajax/ajax01.php?par02="+sel_Dep,true);
 	xmlhttp.send();
+	/*
+	for(var i = 0; i < json.length;i++){
+		console.log(json[i]);
+	}*/
 }
 </script>
 </head>
@@ -108,5 +114,6 @@ function Selecionar_Dep(){
 	<button type="button" onclick="loadXMLDoc()">Crear nuevo</button>
 	<button type="button" onclick="loadXMLDoc_ver()">Ver Usuarios</button>
 	<form id="myDiv"></form>
+	<table id="myTabla"></table>
 </body>
 </html>

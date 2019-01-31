@@ -103,27 +103,19 @@ function VerInfo(){
 
 function VerInfoDepatamento01(){
 	$pdo = getConnection();
-	$stmt = $pdo->query("SELECT personas.Nombre,personas.Email,personas.Telefono,departamen.Nombre,puesto.Nombre 
-		FROM `departamen` 
-		JOIN puesto ON departamen.ID_Dep=puesto.Departamento_Asignado 
-		JOIN personas ON puesto.ID_Puesto=personas.Codigo_Puesto
-		WHERE departamen.ID_Dep=1");
+	$stmt = $pdo->query('SELECT personas.Nombre,personas.Email,personas.Telefono,departamen.Nombre as "nDepartamen",puesto.Nombre as "nPuesto" FROM `departamen` JOIN puesto ON departamen.ID_Dep=puesto.Departamento_Asignado JOIN personas ON puesto.ID_Puesto=personas.Codigo_Puesto WHERE departamen.ID_Dep=1');
 	$stmt->execute();
-	$datos = $stmt->fetchAll();
+	$datos = $stmt->fetchall(PDO::FETCH_CLASS);
 	$json = json_encode($datos);
-	print_r($json);
+	echo $json;
 }
 
 function VerInfoDepatamento02(){
 	$pdo = getConnection();
-	$stmt = $pdo->query("SELECT personas.Nombre,personas.Email,personas.Telefono,departamen.Nombre,puesto.Nombre 
-		FROM `departamen` 
-		JOIN puesto ON departamen.ID_Dep=puesto.Departamento_Asignado 
-		JOIN personas ON puesto.ID_Puesto=personas.Codigo_Puesto
-		WHERE departamen.ID_Dep=2");
+	$stmt = $pdo->query('SELECT personas.Nombre,personas.Email,personas.Telefono,departamen.Nombre as "nDepartamen",puesto.Nombre as "nPuesto" FROM `departamen` JOIN puesto ON departamen.ID_Dep=puesto.Departamento_Asignado JOIN personas ON puesto.ID_Puesto=personas.Codigo_Puesto WHERE departamen.ID_Dep=2');
 	$stmt->execute();
-	$datos = $stmt->fetchAll();
+	$datos = $stmt->fetchall(PDO::FETCH_CLASS);
 	$json = json_encode($datos);
-	print_r($json);
+	echo $json;
 }
 ?>
